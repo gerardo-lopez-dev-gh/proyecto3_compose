@@ -1,0 +1,37 @@
+services:
+  backend:
+    image: backend-api:1.0
+    ports:
+      - "8090:8090"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:13306/sistema_fidelizacion?allowPublicKeyRetrieval=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=secret
+    deploy:
+      resources:
+        limits:
+          memory: 10g
+        reservations:
+          memory: 5g
+    depends_on:
+      - db
+
+  frontend:
+    image: angular-app:1.0
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: sistema_fidelizacion
+    ports:
+      - "13306:3306"  # Mapeamos el puerto 3306 del contenedor al puerto 13306 del host
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
