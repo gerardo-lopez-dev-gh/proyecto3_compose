@@ -1,6 +1,6 @@
 services:
   backend:
-    image: 172.21.0.3:8085/client-electiva3-backend-arquitectura-web-main:20241207_aba1461
+    image: 172.21.0.3:8085/client-electiva3-backend-arquitectura-web-main:20241208_aba1461
     ports:
       - "8090:8090"
     environment:
@@ -17,7 +17,7 @@ services:
       - db
 
   frontend:
-    image: 172.21.0.3:8085/client-electiva3-arquitectura-web-main:20241207_00d3f39
+    image: 172.21.0.3:8085/client-electiva3-arquitectura-web-main:20241208_00d3f39
     ports:
       - "4200:80"
     depends_on:
